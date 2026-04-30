@@ -90,7 +90,7 @@ export async function POST(request: NextRequest) {
 // PUT - Update student
 export async function PUT(request: NextRequest) {
   try {
-    const { id, ...updates } = await request.json();
+    const { id, password, ...updates } = await request.json();
 
     if (!id) {
       return NextResponse.json(
@@ -99,9 +99,14 @@ export async function PUT(request: NextRequest) {
       );
     }
 
+    const dataToUpdate = { ...updates };
+    if (password && password.trim() !== '') {
+      dataToUpdate.password = password;
+    }
+
     await db.user.update({
       where: { id },
-      data: updates
+      data: dataToUpdate
     });
 
     return NextResponse.json({
