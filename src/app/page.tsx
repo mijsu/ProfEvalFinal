@@ -2790,7 +2790,7 @@ function EvaluationPage({
                       textAlign: 'center'
                     }}>
                       <div style={{ fontSize: mobile ? '20px' : '28px', fontWeight: 700, color: '#333' }}>
-                        {(summaryData.evaluations.reduce((sum: number, e: any) => sum + (e.totalScore || 0), 0) / summaryData.evaluations.length / 5).toFixed(1)}
+                        {(summaryData.evaluations.reduce((sum: number, e: any) => sum + (e.totalScore || 0), 0) / summaryData.evaluations.length).toFixed(1)}
                       </div>
                       <div style={{ fontSize: mobile ? '11px' : '13px', color: '#666' }}>Avg Score (/20)</div>
                     </div>
@@ -2801,7 +2801,7 @@ function EvaluationPage({
                       textAlign: 'center'
                     }}>
                       <div style={{ fontSize: mobile ? '20px' : '28px', fontWeight: 700, color: '#333' }}>
-                        {(summaryData.evaluations.reduce((sum: number, e: any) => sum + (e.totalScore || 0), 0) / summaryData.evaluations.length / 5 / 20 * 100).toFixed(0)}%
+                        {(summaryData.evaluations.reduce((sum: number, e: any) => sum + (e.totalScore || 0), 0) / summaryData.evaluations.length / 20 * 100).toFixed(0)}%
                       </div>
                       <div style={{ fontSize: mobile ? '11px' : '13px', color: '#666' }}>Avg Percentage</div>
                     </div>
@@ -2809,7 +2809,7 @@ function EvaluationPage({
 
                   {/* Evaluation List */}
                   {summaryData.evaluations.map((evaluation: any, idx: number) => {
-                    const score = (evaluation.totalScore || 0) / 5;
+                    const score = (evaluation.totalScore || 0);
                     const percentage = (score / 20) * 100;
                     const getRatingLabel = (pct: number) => {
                       if (pct >= 90) return { label: 'Outstanding', color: '#166534' };

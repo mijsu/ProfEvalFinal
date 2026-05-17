@@ -560,7 +560,7 @@ export default function GenerateReports() {
                 </thead>
                 <tbody>
                   {reportData.recentEvaluations.map((evaluation) => {
-                    const displayScore = evaluation.score / 5;
+                    const displayScore = evaluation.score;
                     const percentage = (displayScore / 20) * 100;
                     const colors = getScoreColor(percentage);
                     return (
@@ -867,7 +867,7 @@ export default function GenerateReports() {
                   </thead>
                   <tbody>
                     {detailStudents.map((student, idx) => {
-                      const displayScore = student.score / 5;
+                      const displayScore = student.score;
                       const percentage = (displayScore / 20) * 100;
                       const colors = getScoreColor(percentage);
                       return (
@@ -1089,7 +1089,7 @@ export default function GenerateReports() {
 
               {/* Total Score Card */}
               {(() => {
-                const displayScore = selectedEvaluation.score / 5;
+                const displayScore = selectedEvaluation.score;
                 const percentage = (displayScore / 20) * 100;
                 const colors = getScoreColor(percentage);
                 const sectionScores = calculateSectionScores(selectedEvaluation.ratings);
