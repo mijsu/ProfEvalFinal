@@ -105,8 +105,8 @@ export default function ViewResults() {
         if (!facultyScores[e.facultyName]) {
           facultyScores[e.facultyName] = { total: 0, count: 0 };
         }
-        // Divide by 5 to convert to score out of 20
-        facultyScores[e.facultyName].total += e.totalScore / 5;
+            // `totalScore` is already stored as a score out of 20
+            facultyScores[e.facultyName].total += e.totalScore;
         facultyScores[e.facultyName].count += 1;
       }
     });
@@ -154,7 +154,7 @@ export default function ViewResults() {
             <User size={32} style={{ color: '#8b1a2b' }} />
             <div>
               <div style={{ fontSize: '28px', fontWeight: 700, color: '#333' }}>
-                {evaluations.length > 0 ? (evaluations.reduce((sum, e) => sum + (e.totalScore / 5), 0) / evaluations.length).toFixed(1) : 0}%
+                 {evaluations.length > 0 ? (evaluations.reduce((sum, e) => sum + e.totalScore, 0) / evaluations.length / 20 * 100).toFixed(0) : 0}%
               </div>
               <div style={{ fontSize: '14px', color: '#666' }}>Average Score</div>
             </div>
@@ -356,8 +356,8 @@ export default function ViewResults() {
                   </td>
                 </tr>
               ) : filteredEvaluations.map((evaluation) => {
-                // Convert stored score to display score (divide by 5 to get score out of 20)
-                const displayScore = evaluation.totalScore / 5;
+                // `totalScore` is already a score out of 20
+                const displayScore = evaluation.totalScore;
                 const percentage = (displayScore / 20) * 100;
                 return (
                   <tr key={evaluation.id} style={{ borderBottom: '1px solid #eee' }}>
@@ -449,7 +449,7 @@ export default function ViewResults() {
               <div style={{ marginBottom: '8px' }}><strong>Faculty:</strong> {selectedEvaluation.facultyName}</div>
               <div style={{ marginBottom: '8px' }}><strong>Subject:</strong> {selectedEvaluation.subjectCode} - {selectedEvaluation.subjectTitle}</div>
               <div style={{ marginBottom: '8px' }}><strong>Semester:</strong> {selectedEvaluation.semester} {selectedEvaluation.schoolYear}</div>
-              <div><strong>Total Score:</strong> {(selectedEvaluation.totalScore / 5).toFixed(1)}/20 ({(((selectedEvaluation.totalScore / 5) / 20) * 100).toFixed(0)}%)</div>
+              <div><strong>Total Score:</strong> {selectedEvaluation.totalScore.toFixed(1)}/20 ({((selectedEvaluation.totalScore / 20) * 100).toFixed(0)}%)</div>
             </div>
 
             <h4 style={{ fontSize: '16px', fontWeight: 600, marginBottom: '12px', color: '#333' }}>Section Scores</h4>
